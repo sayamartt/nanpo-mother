@@ -1,0 +1,482 @@
+/* ---------------------------------------------------------------------- */
+/* 0. リセットCSS (ブラウザの初期設定を統一) */
+/* ---------------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* paddingやborderを含めてサイズ計算するお作法 */
+}
+
+a {
+    text-decoration: none; /* リンクの下線を消す */
+    color: inherit; /* リンクの色を親要素から引き継ぐ */
+}
+
+li {
+    list-style: none; /* リストの点（黒丸）を消す */
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* 1. 全体の基本設定 (フォントと背景) */
+/* ---------------------------------------------------------------------- */
+body {
+    background-color: #F5F5F0; /* ベースカラー（生成り色） */
+    font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif; /* 読みやすいフォントを設定 */
+    color: #333333; /* テキストカラー */
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* 2. ヘッダーのデザイン (Flexboxで横並びに) */
+/* ---------------------------------------------------------------------- */
+.main-header {
+    /* メインカラー（紫）を背景に */
+    background-color: #4A235A;
+    /* 文字の色を白っぽく */
+    color: #F5F5F0; 
+    
+    /* Flexboxでロゴとナビゲーションを横並びにする */
+    display: flex;
+    justify-content: space-between; /* 両端に寄せる */
+    align-items: center; /* 上下に中央寄せ */
+
+    padding: 20px 40px; /* 上下左右に余白を設定 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 影をつけて立体感を出す */
+}
+
+/* ロゴのデザイン */
+.logo {
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 2px; /* 文字間隔を少し開けて高級感を出す */
+}
+
+/* ナビゲーションのデザイン */
+.main-nav ul {
+    display: flex; /* リストの項目を横並びにする */
+    gap: 30px; /* 項目間の間隔を設定 */
+}
+
+.main-nav a:hover {
+    opacity: 0.8; /* マウスオーバーで少し薄くする */
+}
+
+/* 「予約する」ボタンのデザイン */
+.cta-button {
+    background-color: #D4AC0D; /* アクセントカラー（金） */
+    color: #4A235A; /* 文字色はメインカラー（紫） */
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s; /* 色が変わるアニメーション */
+}
+
+.cta-button:hover {
+    background-color: #e6c533; /* マウスオーバーで少し明るい金色に */
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* 3. メインビジュアル (ヒーローセクション) のデザイン */
+/* ---------------------------------------------------------------------- */
+.hero {
+    /* 背景画像を設定（今回は仮の画像） */
+    background-image: url('hero.jpg');
+    background-size: cover; /* 画面全体に画像を拡大縮小して表示 */
+    background-position: center; /* 画像を中央に配置 */
+    
+    /* 高さを画面の約70%に設定 */
+    height: 70vh;
+    /* 文字を中央に配置するためのFlexbox設定 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    color: #F5F5F0; /* 文字色を生成り色に */
+}
+
+.hero-content {
+    padding: 20px;
+    /* 背景画像を暗くして文字を読みやすくするオーバーレイの代わり */
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.catchphrase-small {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.catchphrase-main {
+    font-size: 48px;
+    margin-bottom: 20px;
+    /* 明朝体で信頼感を出す */
+    font-family: serif; 
+    font-weight: 300;
+    color:#ffffff;
+}
+
+.tagline {
+    font-size: 16px;
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* 4. 運勢ボタンのデザイン */
+/* ---------------------------------------------------------------------- */
+#fortune-button {
+    font-size: 20px;
+    padding: 12px 30px;
+    margin-top: 25px;
+    cursor: pointer; /* マウスを上に乗せると指のマークにする */
+    border: none;
+    border-radius: 5px;
+}
+
+#fortune-result {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFD700; /* 結果は明るい金色で目立たせる */
+    min-height: 25px; /* 結果が出るまで場所を確保 */
+}
+/* ---------------------------------------------------------------------- */
+/* 5. 鑑定メニューセクションのデザイン */
+/* ---------------------------------------------------------------------- */
+/* 全セクション共通の上下の余白 */
+.section-padding {
+    padding: 80px 5%; 
+    text-align: center;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 5px;
+    color: #4A235A; /* メインカラー */
+}
+
+.section-subtitle {
+    margin-bottom: 40px;
+    color: #666;
+}
+
+/* メニューカードのコンテナ（Flexboxで横並び） */
+.menu-container {
+    display: flex;
+    gap: 30px; /* カード間の隙間 */
+    justify-content: center;
+}
+
+/* 各メニューカードのデザイン */
+.menu-card {
+    width: calc(33.33% - 20px); /* 1/3の幅から隙間を引いたサイズ */
+    padding: 30px;
+    background-color: #ffffff; /* 白いカード背景 */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 影で立体感を出す */
+    transition: transform 0.3s;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px); /* マウスオーバーで少し持ち上がるアニメーション */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.menu-card h3 {
+    color: #4A235A;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #D4AC0D; /* 金色の下線 */
+    padding-bottom: 5px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #D4AC0D; /* 金色で強調 */
+    margin-bottom: 15px;
+}
+/* ---------------------------------------------------------------------- */
+/* 6. お客様の声セクションのデザイン */
+/* ---------------------------------------------------------------------- */
+.reviews-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap; /* スマホなどで幅が狭いときは折り返す */
+}
+
+.review-item {
+    width: 45%; /* 画面の約半分ずつ使う */
+    min-width: 300px; /* 小さくなりすぎないように */
+}
+
+/* 吹き出し本体 */
+.review-bubble {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative; /* 三角形の位置の基準にする */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    text-align: left;
+    line-height: 1.6;
+}
+
+/* 吹き出しの「三角形」を作る魔法のコード */
+.review-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* 本体の下に配置 */
+    left: 30px; /* 左から30pxの位置 */
+    border-top: 10px solid #fff; /* 上が白（本体と同じ色） */
+    border-left: 10px solid transparent; /* 左は透明 */
+    border-right: 10px solid transparent; /* 右も透明 */
+    /* これで下向きの三角形に見える！ */
+}
+
+.reviewer-name {
+    font-weight: bold;
+    color: #4A235A;
+}
+/* ---------------------------------------------------------------------- */
+/* 7. アクセス & フッターのデザイン */
+/* ---------------------------------------------------------------------- */
+.map-container {
+    max-width: 800px;
+    margin: 0 auto 40px; /* 中央寄せして、下に余白 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.contact-info {
+    font-size: 18px;
+    line-height: 2;
+}
+
+/* フッターのデザイン */
+#main-footer {
+    background-color: #4A235A; /* ヘッダーと同じ紫 */
+    color: #F5F5F0;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    margin-top: 50px;
+}
+/* ---------------------------------------------------------------------- */
+/* 8. メインビジュアルの文字の読みにくさ改善 (コントラスト調整) */
+/* ---------------------------------------------------------------------- */
+
+/* ヒーローセクションを基準点にする */
+.hero {
+    position: relative; /* ここを基準に::beforeの位置を決定する */
+    z-index: 1;         /* Hero全体を他の要素より少し上にする */
+}
+
+/* 背景画像の上に乗せる半透明の膜を作成 */
+.hero::before {
+    content: ""; /* 擬似要素には必ずcontentが必要 */
+    position: absolute; /* 親要素(.hero)を基準に配置 */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    /* 半透明の黒色を設定 (50%の透明度) */
+    /* ここを rgba(74, 35, 90, 0.4); のように紫にしてもOK */
+    background-color: rgba(0, 0, 0, 0.3); 
+    
+    z-index: 2; /* 背景画像(z-index:1)より少し上にする */
+}
+
+/* 文字（コンテンツ）を半透明の膜よりさらに上に出す */
+.hero-content {
+    z-index: 3; /* 一番上に表示されるようにする */
+    position: relative; /* z-indexを効かせるために必要 */
+}
+/* ---------------------------------------------------------------------- */
+/* 9. プロフィールページのデザイン */
+/* ---------------------------------------------------------------------- */
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex; /* 写真と文章を横並びにする */
+    gap: 50px;
+    align-items: flex-start; /* 上揃え */
+    text-align: left;
+}
+
+.profile-photo {
+    flex-basis: 300px; /* 写真エリアの幅を固定 */
+    flex-shrink: 0; /* 幅が縮まないようにする */
+}
+
+.profile-text {
+    flex-grow: 1; /* 残りのスペースを全て文章に使う */
+}
+
+.profile-text h3 {
+    color: #4A235A;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #D4AC0D; 
+    padding-bottom: 5px;
+}
+
+.profile-text p {
+    margin-bottom: 20px;
+}
+
+/* スマホ対応（写真と文章を縦並びにする） */
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+/* ---------------------------------------------------------------------- */
+/* 10. 内側ページ専用のヘッダーデザイン（最終確定版） */
+/* ---------------------------------------------------------------------- */
+
+.inner-hero {
+    /* 高さを確実に固定する */
+    padding-top: 80px !important;   
+    padding-bottom: 80px !important;
+    height: 100px;
+}
+
+.inner-hero .hero-content {
+    /* 強い transform/top/min-height の設定を無効化 */
+    transform: none !important; 
+    top: auto !important; 
+    min-height: auto !important; 
+}
+
+/* タイトルサイズも確実に指定 */
+.inner-hero .hero-content h1 {
+    font-size: 40px !important; 
+}
+
+/* ★背景画像を強制的に元のサイズに抑える設定（最後の防波堤） */
+.inner-hero::before {
+    height: 100% !important; /* 親要素の高さに強制的に合わせる */
+    min-height: auto !important;
+}
+/* ---------------------------------------------------------------------- */
+/* 11. 鑑定メニュー詳細ページのデザイン */
+/* ---------------------------------------------------------------------- */
+.menu-list {
+    display: grid;
+    /* 3列で配置し、均等な幅にする */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.menu-item {
+    background-color: #F8F4FA; 
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 5px solid #4A235A; /* メインカラーの線で強調 */
+    text-align: left;
+}
+
+.menu-item h3 {
+    color: #4A235A;
+}
+
+.menu-item .price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #D4AC0D; /* ゴールドカラー */
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+/* 占術手法のボックスデザイン */
+.method-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.method-box {
+    border: 1px solid #E0E0E0;
+    padding: 20px;
+    border-radius: 6px;
+    text-align: left;
+}
+
+.method-box h3 {
+    color: #4A235A;
+    border-bottom: 1px dashed #4A235A;
+    padding-bottom: 5px;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+    .menu-list, .method-container {
+        /* スマホでは縦一列にする */
+        grid-template-columns: 1fr; 
+    }
+}
+/* ---------------------------------------------------------------------- */
+/* 12. アクセス・お問い合わせページのデザイン */
+/* ---------------------------------------------------------------------- */
+
+.access-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start; /* 上揃え */
+    margin-top: 40px;
+}
+
+.access-info {
+    flex-basis: 40%; 
+    padding-right: 20px;
+}
+
+.map-area {
+    flex-basis: 60%;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 350px;
+    background-color: #E0E0E0;
+    border: 1px solid #C0C0C0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.access-info h3 {
+    color: #4A235A;
+    border-bottom: 2px solid #D4AC0D;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.access-info p {
+    line-height: 1.8;
+}
+
+.access-info .note {
+    font-size: 13px;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+    .access-container {
+        flex-direction: column; /* 縦積み */
+    }
+}
