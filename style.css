@@ -485,7 +485,7 @@ h2 {
 /* ============================================== */
 @media (max-width: 768px) {
     
-    /* ------------------- 全体の調整 ------------------- */
+    /* ------------------- ヘッダーの修正（確定版） ------------------- */
     
     /* ヘッダー全体を基準に、ボタンを絶対配置できるようにする */
     .main-header {
@@ -495,58 +495,62 @@ h2 {
         height: auto; 
     }
     
-    /* ------------------- ヘッダーの修正 ------------------- */
-    
     /* ロゴ（南浦の母）の調整 */
     .logo {
         display: inline-block;
         font-size: 24px;
-        width: 100%; /* 全幅を使ってロゴを左寄せで表示 */
+        width: 100%; 
         text-align: left;
     }
 
     /* ナビゲーションリスト全体（ul）の設定 */
     .main-nav ul {
-        display: block; /* 縦並びのブロックに */
+        display: block; 
         width: 100%;
         text-align: center;
-        margin-top: 15px; /* ロゴの下にスペースを開ける */
+        margin-top: 15px; 
         padding: 0;
     }
 
     /* 各ナビゲーション項目（li）の設定 */
     .main-nav ul li {
-        display: inline-block; /* 項目を横に並べる */
-        margin: 5px 8px; /* 項目間の隙間 */
+        display: inline-block; 
+        margin: 5px 8px; 
         font-size: 13px;
-        float: none; /* floatを無効化 */
+        float: none; 
     }
 
     /* 予約ボタン（cta-button）の修正 */
     .main-nav ul li .cta-button {
-        position: absolute; /* 絶対位置で配置 */
-        top: 15px; /* ヘッダー上部から15px */
-        right: 15px; /* 右端から15px */
+        position: absolute; 
+        top: 15px; 
+        right: 15px; 
         padding: 5px 10px; 
         font-size: 12px;
-        z-index: 10; /* 他の要素より手前に表示させる */
+        z-index: 10; 
         margin: 0;
     }
     
-    /* ------------------- 鑑定メニューの修正 ------------------- */
+    /* ------------------- 全ページの鑑定メニュー修正 ------------------- */
 
-    /* メニューを縦一列にする (menu-detail.html用) */
+    /* 1. 全ページ共通のメニューコンテナを縦並びに強制 */
+    .menu-container {
+        /* FlexboxやGridを無効化し、ブロック要素（縦並び）として振る舞わせる */
+        display: block !important; 
+        width: 100%;
+    }
+    
+    /* 2. 各メニューカード（項目）の幅を100%にする */
+    .menu-card {
+        width: 90% !important; /* 90%にして左右に少し余白を作る */
+        margin: 0 auto 20px auto !important; /* 中央寄せにし、下に20pxの隙間を作る */
+        padding: 15px;
+    }
+
+    /* 3. メニュー詳細ページ用の追加調整（不要かもしれませんが念のため残します） */
     .menu-list, .method-container {
-        /* PCのgrid設定を上書きし、縦一列表示にする */
         grid-template-columns: 1fr !important; 
         gap: 30px; 
         padding: 20px;
-    }
-    
-    /* 各メニュー項目の調整 */
-    .menu-list .menu-item {
-        margin: 0;
-        padding: 15px;
-        border: 1px solid #ddd;
     }
 }
