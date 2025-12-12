@@ -553,4 +553,20 @@ h2 {
         gap: 30px; 
         padding: 20px;
     }
+/* 予約ボタン（cta-button）の修正 */
+    /* アクセスページのボタンを中央配置し、余白を確保 */
+    .contact-content .cta-button {
+        display: block; /* aタグをブロック要素に変更し、widthとmargin: autoを効かせる */
+        width: 85%;      /* 幅を広げて押しやすくする */
+        max-width: 300px; /* PCでもこのサイズを超えない */
+        margin: 20px auto 30px auto; /* 上20px、下30pxの余白を確保し、中央寄せにする */
+        font-size: 16px;
+        padding: 10px 0;
+    }
+    
+    /* ボタン直前のテキスト（<p>タグ）の下の余白を調整 */
+    .contact-content p {
+        margin-bottom: 5px; /* ボタンとテキストの間隔を狭くしすぎないように調整 */
+        padding: 0 10px;
+    }
 }
