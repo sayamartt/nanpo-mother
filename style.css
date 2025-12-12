@@ -480,3 +480,44 @@ h2 {
         flex-direction: column; /* 縦積み */
     }
 }
+/* --- style.css の一番下に、このコードをまるごと貼り付けてください --- */
+
+@media (max-width: 768px) {
+    /* -------------------------------------- */
+    /* ヘッダーの修正 */
+    /* -------------------------------------- */
+    
+    .main-nav ul {
+        display: block; 
+        text-align: center; 
+        padding: 10px 0; 
+    }
+
+    .main-nav ul li {
+        display: inline-block; 
+        margin: 0 5px; 
+        font-size: 13px; 
+    }
+
+    .logo {
+        font-size: 24px; 
+        text-align: left; 
+        width: 100%; 
+    }
+
+    .main-nav ul li .cta-button {
+        float: right; 
+        padding: 5px 10px; 
+        font-size: 12px;
+        margin-top: -30px; 
+    }
+
+    /* -------------------------------------- */
+    /* 鑑定メニューの詳細表示の修正 */
+    /* -------------------------------------- */
+
+    .menu-list, .method-container {
+        grid-template-columns: 1fr; 
+        gap: 20px; 
+    }
+}
