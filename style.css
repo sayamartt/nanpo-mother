@@ -480,44 +480,73 @@ h2 {
         flex-direction: column; /* 縦積み */
     }
 }
-/* --- style.css の一番下に、このコードをまるごと貼り付けてください --- */
-
+/* ============================================== */
+/* === スマホ専用スタイル (768px以下) === */
+/* ============================================== */
 @media (max-width: 768px) {
-    /* -------------------------------------- */
-    /* ヘッダーの修正 */
-    /* -------------------------------------- */
     
-    .main-nav ul {
+    /* ------------------- 全体の調整 ------------------- */
+    
+    /* ヘッダー全体を基準に、ボタンを絶対配置できるようにする */
+    .main-header {
+        position: relative; 
         display: block; 
-        text-align: center; 
-        padding: 10px 0; 
+        padding: 15px;
+        height: auto; 
     }
-
-    .main-nav ul li {
-        display: inline-block; 
-        margin: 0 5px; 
-        font-size: 13px; 
-    }
-
+    
+    /* ------------------- ヘッダーの修正 ------------------- */
+    
+    /* ロゴ（南浦の母）の調整 */
     .logo {
-        font-size: 24px; 
-        text-align: left; 
-        width: 100%; 
+        display: inline-block;
+        font-size: 24px;
+        width: 100%; /* 全幅を使ってロゴを左寄せで表示 */
+        text-align: left;
     }
 
+    /* ナビゲーションリスト全体（ul）の設定 */
+    .main-nav ul {
+        display: block; /* 縦並びのブロックに */
+        width: 100%;
+        text-align: center;
+        margin-top: 15px; /* ロゴの下にスペースを開ける */
+        padding: 0;
+    }
+
+    /* 各ナビゲーション項目（li）の設定 */
+    .main-nav ul li {
+        display: inline-block; /* 項目を横に並べる */
+        margin: 5px 8px; /* 項目間の隙間 */
+        font-size: 13px;
+        float: none; /* floatを無効化 */
+    }
+
+    /* 予約ボタン（cta-button）の修正 */
     .main-nav ul li .cta-button {
-        float: right; 
+        position: absolute; /* 絶対位置で配置 */
+        top: 15px; /* ヘッダー上部から15px */
+        right: 15px; /* 右端から15px */
         padding: 5px 10px; 
         font-size: 12px;
-        margin-top: -30px; 
+        z-index: 10; /* 他の要素より手前に表示させる */
+        margin: 0;
     }
+    
+    /* ------------------- 鑑定メニューの修正 ------------------- */
 
-    /* -------------------------------------- */
-    /* 鑑定メニューの詳細表示の修正 */
-    /* -------------------------------------- */
-
+    /* メニューを縦一列にする (menu-detail.html用) */
     .menu-list, .method-container {
-        grid-template-columns: 1fr; 
-        gap: 20px; 
+        /* PCのgrid設定を上書きし、縦一列表示にする */
+        grid-template-columns: 1fr !important; 
+        gap: 30px; 
+        padding: 20px;
+    }
+    
+    /* 各メニュー項目の調整 */
+    .menu-list .menu-item {
+        margin: 0;
+        padding: 15px;
+        border: 1px solid #ddd;
     }
 }
