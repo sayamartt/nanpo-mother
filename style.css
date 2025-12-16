@@ -13,12 +13,11 @@ a {
 }
 
 li {
-
     list-style: none; /* リストの点（黒丸）を消す */
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -29,7 +28,13 @@ body {
     font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif; /* 読みやすいフォントを設定 */
     color: #333333; /* テキストカラー */
 }
-
+/* ---------------------------------------------------------------------- */
+/* 99. ハンバーガーメニューの基本設定 (PCでは非表示) */
+/* ---------------------------------------------------------------------- */
+.hamburger-menu-button {
+    /* PCでは完全に非表示にする */
+    display: none; 
+}
 
 /* ---------------------------------------------------------------------- */
 /* 2. ヘッダーのデザイン (Flexboxで横並びに) */
@@ -276,7 +281,7 @@ h2 {
 /* ヒーローセクションを基準点にする */
 .hero {
     position: relative; /* ここを基準に::beforeの位置を決定する */
-    z-index: 1;         /* Hero全体を他の要素より少し上にする */
+    z-index: 1; 
 }
 
 /* 背景画像の上に乗せる半透明の膜を作成 */
@@ -288,8 +293,7 @@ h2 {
     right: 0;
     bottom: 0;
     
-    /* 半透明の黒色を設定 (50%の透明度) */
-    /* ここを rgba(74, 35, 90, 0.4); のように紫にしてもOK */
+    /* 半透明の黒色を設定 (30%の透明度) */
     background-color: rgba(0, 0, 0, 0.3); 
     
     z-index: 2; /* 背景画像(z-index:1)より少し上にする */
@@ -347,7 +351,7 @@ h2 {
 
 .inner-hero {
     /* 高さを確実に固定する */
-    padding-top: 80px !important;   
+    padding-top: 80px !important; 
     padding-bottom: 80px !important;
     height: 100px;
 }
@@ -484,8 +488,10 @@ h2 {
         flex-direction: column; /* 縦積み */
     }
 }
+
+
 /* ============================================== */
-/* === スマホ専用スタイル (768px以下) === */
+/* === スマホ専用スタイル (768px以下) 【★ハンバーガーメニューとレイアウト修正エリア★】 === */
 /* ============================================== */
 @media (max-width: 768px) {
     
@@ -507,6 +513,76 @@ h2 {
         text-align: left;
     }
 
+    /* ------------------- ハンバーガーボタンの描画 ------------------- */
+    
+    /* 1. ボタン本体のデザインと表示設定 */
+    .hamburger-menu-button {
+        display: block; /* PCで消したものをスマホでは表示する */
+        position: absolute; 
+        top: 15px; 
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 20; 
+    }
+
+    /* 2. ボタンの中の3本線 (span) のデザイン */
+    .hamburger-menu-button span {
+        display: block;
+        width: 100%;
+        height: 2px; 
+        background-color: #F5F5F0; 
+        margin-bottom: 6px; 
+        transition: transform 0.3s, opacity 0.3s; 
+    }
+
+    /* 3. ナビゲーションメニュー本体の設定 */
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; 
+        background-color: rgba(74, 35, 90, 0.95); 
+        z-index: 15;
+        transform: translateX(-100%); /* 最初は画面外に隠す */
+        transition: transform 0.4s ease-out; 
+    }
+    
+    /* 4. スマホでメニューを縦積みする */
+    .main-nav ul {
+        flex-direction: column;
+        padding: 100px 0 0 0;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    /* 5. 予約ボタンのデザインを縦積みに合わせる */
+    .main-nav ul li .cta-button {
+        position: static; 
+        display: block;
+        width: 200px;
+        margin-top: 20px;
+    }
+    
+    /* 6. JSが付けた「open」クラスの動き */
+    .main-nav.open {
+        transform: translateX(0%); /* 画面内にスライド */
+    }
+
+    .hamburger-menu-button.open span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-menu-button.open span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger-menu-button.open span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
     /* ------------------- 全ページの鑑定メニュー修正 ------------------- */
 
     /* 1. 全ページ共通のメニューコンテナを縦並びに強制 */
@@ -523,19 +599,20 @@ h2 {
         padding: 15px;
     }
 
-    /* 3. メニュー詳細ページ用の追加調整（不要かもしれませんが念のため残します） */
+    /* 3. メニュー詳細ページ用の追加調整（grid-template-columnsは上記11で定義済み） */
     .menu-list, .method-container {
+        /* この設定は上記11のメディアクエリに上書きされますが、安全のためここに残します */
         grid-template-columns: 1fr !important; 
         gap: 30px; 
         padding: 20px;
     }
-/* ------------------- アクセスページの予約ボタン修正（確定版） ------------------- */
+
+    /* ------------------- アクセスページの予約ボタン修正（確定版） ------------------- */
     
     /* 1. 予約ボタン（cta-button）の修正 */
-    /* ID指定で優先度を上げ、中央配置と余白を確実に適用 */
     #contact-content .cta-button {
         display: block !important; /* ブロック要素に変更し、中央寄せを効かせる */
-        width: 85%;      
+        width: 85%;      
         max-width: 300px; 
         margin: 20px auto 30px auto !important; /* 上20px、下30pxの余白を確保し、中央寄せに強制 */
         font-size: 16px;
@@ -543,95 +620,135 @@ h2 {
     }
     
     /* 2. ボタン直前のテキスト（<p>タグ）の下の余白を調整 */
-    /* ボタンとテキストの間隔を調整し、見栄えを整える */
     #contact-content p {
         margin-bottom: 5px; 
         padding: 0 10px;
     }
-    /* ---------------------------------------------------------------------- */
-/* 99. ハンバーガーメニューの基本設定 (PCでは非表示) */
-/* ---------------------------------------------------------------------- */
-.hamburger-menu-button {
-    /* PCでは完全に非表示にする */
-    display: none; 
-　　}
-/* ------------------- ハンバーガーボタンの描画 ------------------- */
     
-    /* 1. ボタン本体のデザインと表示設定 */
-    .hamburger-menu-button {
-        display: block; /* スマホでは表示する */
-        position: absolute; /* ヘッダーのどこか（右端など）に固定するために */
-        top: 15px; 
-        right: 15px;
-        width: 30px;
-        height: 30px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 20; /* 他の要素より手前に表示する */
+    /* ------------------- モーダルのスマホ対応 ------------------- */
+    /* モーダルが画面いっぱいに広がりすぎないように調整 */
+    .modal-content {
+        margin: 20px auto; 
     }
 
-    /* 2. ボタンの中の3本線 (span) のデザイン */
-    .hamburger-menu-button span {
-        display: block;
-        width: 100%;
-        height: 2px; /* 線の太さ */
-        background-color: #F5F5F0; /* ヘッダーの色に合わせて白っぽい色 */
-        margin-bottom: 6px; /* 線と線の間隔 */
-        transition: transform 0.3s, opacity 0.3s; /* アニメーション設定 */
-    }
+} /* 【★レイアウト崩れの原因であった、@media の閉じカッコをここで追加★】 */
 
-    /* 3. ナビゲーションメニュー本体を一旦隠す（横にスライドさせて見えなくする） */
-    .main-nav {
-        /* スマホ画面全体を覆うように設定 */
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh; /* 画面全体を覆う */
-        background-color: rgba(74, 35, 90, 0.95); /* 半透明の紫で覆う */
-        z-index: 15;
-        /* 最初は画面外（左側）に隠しておく */
-        transform: translateX(-100%); 
-        transition: transform 0.4s ease-out; /* スライドのアニメーション */
-    }
+/* ================================================== */
+/* 4. 予約モーダルウィンドウ（フォーム）のスタイル */
+/* ================================================== */
+
+/* 1. モーダル本体（画面全体を覆い隠す部分） */
+.modal {
+    display: none; /* 初期状態では完全に非表示にする */
+    position: fixed; /* 画面に固定する */
+    z-index: 100; /* 全てのコンテンツより最前面に表示する */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* 内容が画面より大きくなったらスクロール可能にする */
+    background-color: rgba(0, 0, 0, 0.8); /* 半透明の黒で背景を暗くする */
+    padding-top: 50px; /* フォームを少し下にずらす */
+}
+
+/* 2. モーダルの中身（白いウィンドウ部分） */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 上下に余白を作り、中央に配置 */
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%; 
+    max-width: 500px; /* PCでは幅を制限し、見やすくする */
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. フォームの入力項目 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #4A235A; /* メインカラーに合わせて */
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="datetime-local"],
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* paddingを含めて幅100%になるようにする */
+}
+
+.modal-content textarea {
+    resize: vertical; /* 縦方向のみリサイズ可能にする */
+}
+
+/* 4. 閉じるボタン（×印） */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px; /* 高さを調整 */
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 5. JavaScriptで付与する「open」クラスが適用された時のスタイル */
+.modal.open {
+    display: block; /* openクラスが付いたら表示する */
+}
+/* ================================================== */
+/* 5. トップに戻るボタン（Scroll-to-Top Button）のスタイル */
+/* ================================================== */
+#scroll-to-top {
+    /* 1. 配置設定：画面の右下に固定する */
+    position: fixed; /* 画面に固定し、スクロールしても動かないようにする */
+    bottom: 20px; /* 画面の下端から 20px 離す */
+    right: 20px; /* 画面の右端から 20px 離す */
     
-    /* 4. スマホでメニューを縦積みする */
-    .main-nav ul {
-        flex-direction: column;
-        padding: 100px 0 0 0;
-        gap: 20px;
-        align-items: center;
-    }
+    /* 2. デザイン設定 */
+    width: 50px;
+    height: 50px;
+    line-height: 50px; /* テキストを垂直方向に中央揃えにする（高さと同じ値に設定） */
+    text-align: center; /* テキストを水平方向に中央揃えにする */
     
-    /* 5. 予約ボタンのデザインを縦積みに合わせる */
-    .main-nav ul li .cta-button {
-        position: static; /* 絶対配置を解除 */
-        display: block;
-        width: 200px;
-        margin-top: 20px;
-    }
-    /* ------------------- 4. JSが付けた「open」クラスの動き ------------------- */
+    background-color: #D4AC0D; /* アクセントカラー（金色） */
+    color: #4A235A; /* 文字色（メインカラーの紫） */
     
-    /* 【メニューを開く動作】: openクラスが付いたら画面内にスライドさせる */
-    .main-nav.open {
-        transform: translateX(0%); /* 画面外(-100%) から 画面内 (0%) に移動 */
-    }
+    border: none;
+    border-radius: 50%; /* 半径を50%にしてボタンを完全に円形にする */
+    
+    font-size: 24px; /* 矢印のサイズ */
+    font-weight: bold;
+    cursor: pointer; /* マウスオーバー時にカーソルを指の形にする */
+    
+    /* 3. 表示設定：最初は完全に非表示 */
+    display: none; /* 初期状態ではボタンを非表示にする（JavaScriptで操作する） */
+    
+    /* 4. 重ね合わせ順序 */
+    z-index: 90; /* モーダル（z-index: 100）よりは下、通常のコンテンツよりは上に配置 */
+    
+    /* 5. 装飾とアニメーション */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease; /* マウスオーバー時のアニメーションを滑らかに */
+}
 
-    /* 【アイコンの×印への変形】: openクラスが付いたら3本線を回転させる */
-
-    /* 1本目: 下にずらして45度回転 */
-    .hamburger-menu-button.open span:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    /* 2本目: 透明にして消す */
-    .hamburger-menu-button.open span:nth-child(2) {
-        opacity: 0;
-    }
-
-    /* 3本目: 上にずらして-45度回転 */
-    .hamburger-menu-button.open span:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
+/* マウスオーバー時の色を変えて、クリックできることを強調 */
+#scroll-to-top:hover {
+    background-color: #e6c533; 
 }

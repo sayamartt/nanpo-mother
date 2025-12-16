@@ -22,7 +22,7 @@
         <li><a href="#profile-content">南浦の母について</a></li> 
         <li><a href="#reviews">お客様の声</a></li>
         <li><a href="#contact-content">アクセス</a></li>
-        <li><a href="#contact-content" class="cta-button">予約する</a></li>
+        <li><a href="#contact-content" class="cta-button reserve-button">予約する</a></li>
     </ul>
 </nav>
     </header>
@@ -63,7 +63,7 @@
     </div>
     
     <div style="text-align: center; margin-top: 40px;">
-        <a href="#" class="cta-button">ご予約はこちら</a>
+        <a href="#" class="cta-button reserve-button">ご予約はこちら</a>
     </div>
 
     <h2 style="margin-top: 80px;">南浦の母が用いる鑑定手法</h2>
@@ -141,7 +141,7 @@
             <h3 style="margin-top: 30px;">ご予約について</h3>
             <p>ご予約は以下のボタンから承っております。空き状況をご確認の上、お申し込みください。</p>
             
-            <a href="#" class="cta-button">オンラインで予約する</a>
+            <a href="#" class="cta-button reserve-button">オンラインで予約する</a>
         </div>
 
         <div class="map-area">
@@ -155,6 +155,50 @@
     <footer id="main-footer">
         <p>&copy; 2025 Nanpo no Haha. All Rights Reserved.</p>
     </footer>
+    <div id="reservation-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h3>鑑定のご予約フォーム</h3>
+        <p class="section-subtitle">ご希望のコースと日時を選択してください。後日、詳細な場所と確定日時をご連絡します。</p>
+
+        <form id="reservation-form">
+            <div class="form-group">
+                <label for="name">お名前 (必須)</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">メールアドレス (必須)</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="course">希望コース (必須)</label>
+                <select id="course" name="course" required>
+                    <option value="">選択してください</option>
+                    <option value="tesou">手相鑑定（20分 / ¥3,000）</option>
+                    <option value="sogo">総合鑑定（60分 / ¥8,000）</option>
+                    <option value="michishirube">人生の道標コース（90分 / ¥15,000）</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date1">希望日時 (第1希望)</label>
+                <input type="datetime-local" id="date1" name="date1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">ご相談の概要 (任意)</label>
+                <textarea id="message" name="message" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="cta-button">内容を確認して予約を申し込む</button>
+        </form>
+    </div>
+</div>
+<button id="scroll-to-top" aria-label="トップに戻る">
+    ↑
+</button>
     <script src="script.js"></script>
 </body>
 </html>
