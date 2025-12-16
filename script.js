@@ -51,3 +51,26 @@ button.addEventListener('click', () => {
         button.disabled = false;
     }, 3000);
 });
+// --------------------------------------------------
+// ▼▼▼ スムーズスクロールを強制的に実行するコード ▼▼▼
+// --------------------------------------------------
+
+// ページ内のすべての「#」で始まるリンクを取得
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        // 1. デフォルトの「カクッと飛ぶ」動作をキャンセル
+        e.preventDefault();
+
+        // 2. リンク先のIDを取得（例: #menu-detail）
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        // 3. リンク先が存在すれば、スムーズにスクロール
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
