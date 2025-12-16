@@ -36,28 +36,27 @@ if (button) {
         }, 3000);
     });
 }
-
 // ==================================================
-// 2. スムーズスクロール機能（強制実行版）
+// 2. スムーズスクロール機能（ナビゲーション内リンク限定）
 // ==================================================
 
 // 読み込みが完了したことをコンソールに表示
 console.log("script.js は正しく読み込まれています");
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// メインナビゲーション内のアンカーリンクだけを対象にする
+document.querySelectorAll('.main-nav a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         
         // リンク先（hrefの中身）を取得
         const href = this.getAttribute('href');
 
-        // ★修正点: hrefが「#」だけ、または空の場合は何もしない（エラー防止）
+        // ★ hrefが「#」だけ、または空の場合は何もしない（エラー防止）
         if (!href || href === "#") {
             return; 
         }
 
         // 1. デフォルトのジャンプ動作をキャンセル
         e.preventDefault();
-        console.log("クリックされました。ターゲット: " + href); // ★動作確認用ログ
 
         // 2. ターゲット要素を取得
         const targetElement = document.querySelector(href);
@@ -68,8 +67,34 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
-        } else {
-            console.log("ターゲット要素が見つかりません: " + href);
         }
     });
 });
+
+// ==================================================
+// 3. ハンバーガーメニューの開閉機能
+// ==================================================
+
+// 要素を取得
+const menuButton = document.querySelector('.hamburger-menu-button');
+const navMenu = document.querySelector('.main-nav');
+
+// ボタンが存在する場合のみイベントを設定
+if (menuButton) {
+    // クリックイベントリスナーを追加
+    menuButton.addEventListener('click', () => {
+        // ハンバーガーボタンに 'open' クラスを付け外しする
+        menuButton.classList.toggle('open');
+        // ナビゲーションメニュー本体に 'open' クラスを付け外しする
+        navMenu.classList.toggle('open'); 
+    });
+    
+    // メニュー項目をクリックしたらメニューを閉じる処理（UX向上）
+    const navLinks = navMenu.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuButton.classList.remove('open');
+            navMenu.classList.remove('open');
+        });
+    });
+}

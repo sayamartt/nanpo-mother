@@ -507,34 +507,6 @@ h2 {
         text-align: left;
     }
 
-    /* ナビゲーションリスト全体（ul）の設定 */
-    .main-nav ul {
-        display: block; 
-        width: 100%;
-        text-align: center;
-        margin-top: 15px; 
-        padding: 0;
-    }
-
-    /* 各ナビゲーション項目（li）の設定 */
-    .main-nav ul li {
-        display: inline-block; 
-        margin: 5px 8px; 
-        font-size: 13px;
-        float: none; 
-    }
-
-    /* 予約ボタン（cta-button）の修正 */
-    .main-nav ul li .cta-button {
-        position: absolute; 
-        top: 15px; 
-        right: 15px; 
-        padding: 5px 10px; 
-        font-size: 12px;
-        z-index: 10; 
-        margin: 0;
-    }
-    
     /* ------------------- 全ページの鑑定メニュー修正 ------------------- */
 
     /* 1. 全ページ共通のメニューコンテナを縦並びに強制 */
@@ -639,6 +611,27 @@ h2 {
         width: 200px;
         margin-top: 20px;
     }
+    /* ------------------- 4. JSが付けた「open」クラスの動き ------------------- */
     
-    /* ... 既存のスマホ用CSS ... */
+    /* 【メニューを開く動作】: openクラスが付いたら画面内にスライドさせる */
+    .main-nav.open {
+        transform: translateX(0%); /* 画面外(-100%) から 画面内 (0%) に移動 */
+    }
+
+    /* 【アイコンの×印への変形】: openクラスが付いたら3本線を回転させる */
+
+    /* 1本目: 下にずらして45度回転 */
+    .hamburger-menu-button.open span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    /* 2本目: 透明にして消す */
+    .hamburger-menu-button.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    /* 3本目: 上にずらして-45度回転 */
+    .hamburger-menu-button.open span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
 }
