@@ -752,3 +752,48 @@ h2 {
 #scroll-to-top:hover {
     background-color: #e6c533; 
 }
+/* --- スマホ横向き（ランドスケープ）用の修正 --- */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+  
+  /* 1. ヘッダーの高さを低くし、要素が重ならないようにする */
+  header {
+    padding: 5px 0; /* 上下の余白を狭くする */
+  }
+
+  .header-logo {
+    font-size: 1.2rem; /* ロゴを少し小さく */
+    margin-left: 15px;
+  }
+
+  /* ナビゲーションの文字を小さくして横に並びやすくする */
+  .header-nav ul {
+    gap: 10px; /* メニュー間の隙間を狭くする */
+  }
+
+  .header-nav ul li a {
+    font-size: 0.8rem; /* 文字を小さく */
+  }
+
+  /* 2. メインビジュアル（背景画像）の高さを調整 */
+  .main-visual {
+    height: 120vh; /* 横向きだと高さが足りなくなるので、少し余裕を持たせる */
+    padding-top: 60px; /* ヘッダーに被らないように調整 */
+  }
+
+  /* 3. 中央の大きな文字を小さくし、位置を調整 */
+  .main-visual-content h1 {
+    font-size: 2rem; /* 「あなたの道標〜」の文字を小さく */
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .main-visual-content p {
+    font-size: 0.9rem; /* 「鑑定歴30年〜」の文字を小さく */
+  }
+
+  /* 4. ボタンのサイズを調整 */
+  .btn-fortune {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+}
